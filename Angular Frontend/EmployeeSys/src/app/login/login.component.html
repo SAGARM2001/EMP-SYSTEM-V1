@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5" [formGroup]="loginForm">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Login</h2>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                            <mat-card>
+                                <mat-card-content>
+                                    <mat-form-field>
+                                        <div class="input-container">
+                                            <input matInput formControlName="userName" placeholder="Username" required type="text">
+                                            <i class="material-icons input-icon">account_circle</i>
+                                        </div>
+                                        <mat-error *ngIf="loginForm.get('userName')?.hasError('required')">Username is
+                                            required</mat-error>
+                                        <mat-error *ngIf="loginForm.get('userName')?.hasError('minlength')">Username
+                                            must be at least 4 characters long</mat-error>
+                                        <mat-error *ngIf="loginForm.get('userName')?.hasError('pattern')">Username must
+                                            start with an uppercase letter and contain only alphabets</mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <div class="input-container">
+                                            <input matInput formControlName="password" type="password"
+                                                placeholder="Password" required>
+                                            <i class="material-icons input-icon">lock</i>
+                                        </div>
+                                        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is
+                                            required</mat-error>
+                                        <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Password
+                                            must be at least 6 characters long</mat-error>
+                                    </mat-form-field>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                    <button mat-raised-button
+                                        [class]="loginForm.valid ? 'btn-primary' : 'btn-light-blue'" type="submit"
+                                        [disabled]="!loginForm.valid">Login</button>
+                                </mat-card-actions>
+                            </mat-card>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

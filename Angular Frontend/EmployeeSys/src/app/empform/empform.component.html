@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <mat-grid-list cols="2">
+        <mat-grid-tile>
+            <div class="container">
+                <H4>Employee Form</H4>
+                <div class="form-box">
+                    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center flex-end">
+                        <form [formGroup]="empForm">
+                            <div fxLayout="row" fxLayout.xs="column">
+                                <div class="side-by-side">
+                                    <mat-form-field style="width: 48%;">
+                                        <input matInput placeholder="First Name" formControlName="firstName" required>
+                                        <mat-icon matSuffix="material-icons">person</mat-icon>
+                                        <mat-error *ngIf="empForm.get('firstName')?.hasError('required')">First Name is
+                                            required</mat-error>
+                                        <mat-error *ngIf="empForm.get('firstName')?.hasError('pattern')">First Name must
+                                            start
+                                            with
+                                            an uppercase letter</mat-error>
+                                        <mat-error *ngIf="empForm.get('firstName')?.hasError('minlength')">First Name
+                                            must
+                                            have at
+                                            least 3 characters</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field style="width: 48%;">
+                                        <input matInput placeholder="Last Name" formControlName="lastName" required>
+                                        <mat-icon matSuffix="material-icons">person</mat-icon>
+                                        <mat-error *ngIf="empForm.get('lastName')?.hasError('required')">Last Name is
+                                            required</mat-error>
+                                        <mat-error *ngIf="empForm.get('lastName')?.hasError('pattern')">Last Name must
+                                            start
+                                            with
+                                            an uppercase letter</mat-error>
+                                        <mat-error *ngIf="empForm.get('lastName')?.hasError('minlength')">Last Name must
+                                            have at
+                                            least 5 characters</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="side-by-side">
+                                    <mat-form-field style="width: 48%;">
+                                        <input matInput placeholder="Contact No" formControlName="contact" required>
+                                        <mat-icon matSuffix="material-icons">phone</mat-icon>
+                                        <mat-error *ngIf="empForm.get('contact')?.hasError('required')">Contact is
+                                            required</mat-error>
+                                        <mat-error *ngIf="empForm.get('contact')?.hasError('pattern')">Contact must be a
+                                            10-digit
+                                            number</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field style="width: 48%;">
+                                        <input matInput placeholder="Email" formControlName="email" required>
+                                        <mat-icon matSuffix="material-icons">email</mat-icon>
+                                        <mat-error *ngIf="empForm.get('email')?.hasError('required')">Email is
+                                            required</mat-error>
+                                        <mat-error *ngIf="empForm.get('email')?.hasError('email')">Invalid email
+                                            address</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="side-by-side">
+                                    <mat-form-field style="width: 48%;">
+                                        <input matInput placeholder="Date of Birth" formControlName="dob" required>
+                                        <mat-icon matSuffix="material-icons">event</mat-icon>
+                                        <mat-error *ngIf="empForm.get('dob')?.hasError('required')">Date of Birth is
+                                            required</mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field style="width: 48%;">
+                                        <input matInput placeholder="Address" formControlName="address" required>
+                                        <mat-icon matSuffix="material-icons">home</mat-icon>
+                                        <mat-error *ngIf="empForm.get('address')?.hasError('required')">Address is
+                                            required</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxLayout="row" fxLayout.xs="column">
+                                    <!-- <button mat-raised-button color="accent" type="submit" style="width: 100%;"
+                                        [disabled]="!empForm.valid">
+                                        Add Employee
+                                        <mat-icon matSuffix="material-icons">add</mat-icon>
+                                    </button> -->
+                                    <button mat-raised-button color="accent" type="button" style="width: 100%;"
+                                        [disabled]="!empForm.valid" (click)="onUpdate()">
+                                        {{ selectedEmployee ? 'Update Employee' : 'Add Employee' }}
+                                        <mat-icon matSuffix="material-icons">{{ selectedEmployee ? 'edit' : 'add'
+                                            }}</mat-icon>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="table-container">
+                <h4>Employee Data</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Date of Birth</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let employee of employees">
+                            <td>{{ employee.fname }}</td>
+                            <td>{{ employee.lname }}</td>
+                            <td>{{ employee.contact }}</td>
+                            <td>{{ employee.email }}</td>
+                            <td>{{ employee.dob }}</td>
+                            <td>{{ employee.address }}</td>
+                            <td>
+                                <span class="material-icons" style="cursor: pointer; color: green;"
+                                    (click)="editUser(employee)">edit</span>
+                                <span class="material-icons" style="cursor: pointer; color: red;"
+                                    (click)="deleteUser(employee.emp_id)">delete</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</body>
+
+</html>

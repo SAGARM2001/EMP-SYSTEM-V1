@@ -1,0 +1,29 @@
+.container {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.error-card {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.back-button {
+    width: 200px;
+    margin-top: 20px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #45a049; /* Darker Green */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}

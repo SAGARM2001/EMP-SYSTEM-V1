@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Welcome, {{ user?.fname }} {{ user?.lname }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ user?.emp_id }}</td>
+                    <td>{{ user?.fname }}</td>
+                    <td>{{ user?.lname }}</td>
+                    <td>{{ user?.contact }}</td>
+                    <td>{{ user?.email }}</td>
+                    <td>{{ user?.dob }}</td>
+                    <td>{{ user?.address }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button (click)="onLogout()">LogOut</button>
+    </div>
+</body>
+
+</html>
